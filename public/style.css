@@ -1,16 +1,22 @@
 :root {
-  --main-bg-color: #e0ebeb;
+  --main-bg-color: #cfc0f3;
   --light-blue: #03a9f4;
-  --border-color: #0288d147;
+  --border-color: #251d9947;
   --container-width: 500px;
+  
 }
-
+body {
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: system-ui;
-  background: var(--main-bg-color);
+  /*background: var(--main-bg-color);*/
   height: 98vh;
-  overflow: hidden;
+  overflow: auto;
+  background: linear-gradient(to right, #b92b27, #1565c0);
 }
+
 
 .logo {
   position: absolute;
@@ -19,14 +25,33 @@ body {
   width: 170px;
 }
 
-.image-vector {
-  width: 50vw;
-  height: 50vh;
-  background: url(/undraw-upload.svg) no-repeat center;
-  background-size: contain;
+
+.navbar-nav{
+  margin-left: auto;
+}
+.main {
+  margin: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
-body,
+@media (max-width: 1080px) {
+  .main {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .main section {
+    margin-bottom: 2rem;
+  }
+}
+
+.main section {
+  margin-left: 4rem;
+}
+
+
 .upload-container,
 .drop-zone {
   display: flex;
@@ -38,8 +63,18 @@ body,
   flex-direction: column;
 }
 
+.image-vector {
+  width: 50vw;
+  height: 60vh;
+  background: url(/undraw-upload.svg) no-repeat center;
+  background-size: contain;
+
+
+}
+
 .upload-container {
-  background: #ffffff;
+  
+  background: #e9c0c0; 
   border-radius: 25px;
   box-shadow: 0px 20px 20px 0px #00000017;
 }
@@ -181,7 +216,7 @@ body,
   font-size: 20px;
   border: 2px dashed var(--border-color);
   border-radius: 6px;
-  background: #f5fcff;
+  background:  #ccebff;
   color: #607d8b;
 }
 
@@ -192,7 +227,7 @@ body,
   right: 7px;
   top: 12px;
   cursor: pointer;
-  background: #f5fcff;
+  background: #ccebff;
 }
 
 .email-container form {
@@ -218,6 +253,7 @@ body,
 
 .email-container input {
   border: none;
+  background-color: #e9c0c0;
   border-bottom: 2px solid var(--border-color);
   height: 19px;
   font-size: 18px;
@@ -239,12 +275,17 @@ body,
   font-size: 18px;
   padding: 8px 40px;
   margin-top: 15px;
-  background: var(--main-bg-color);
+  background: #ce5955;
   border: none;
   border-radius: 5px;
-  color: #607d8b;
+  color: #ffff;
   cursor: pointer;
 }
+
+.send-btn-container button:hover {
+  background-color:  #5188c7;
+}
+
 
 .toast {
   position: absolute;
@@ -262,12 +303,16 @@ body,
 }
 
 .show.toast {
+  background: black;
   transform: translate(50%, 0);
 }
 
 @media screen and (max-width: 900px) {
   :root {
     --container-width: 320px;
+  }
+  .upload-container{
+    margin-left: 0px;
   }
   .image-vector {
     display: none;
@@ -279,3 +324,4 @@ body,
     width: 300px;
   }
 }
+

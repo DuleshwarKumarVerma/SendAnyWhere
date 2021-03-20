@@ -6,23 +6,33 @@
 
   body {
     font-family: system-ui;
-    background: var(--main-bg-color);
+    background: linear-gradient(to right, #b92b27, #1565c0);
     height: 98vh;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    
     color: #333;
   }
 
   .logo {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 190px;
+    top: 5px;
+    left: 5px;
+    width: 250px;
   }
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-nav{
+  margin-left: auto;
+}
+
+
 section.download {
-    background: #fff;
+  margin-top: 6rem;
+    background: #e9c0c0;
     width: 430px;
     max-width: 90%;
     border-radius: 25px;
@@ -33,6 +43,7 @@ section.download {
 .download__icon {
     opacity: 0.45;
     height: 7rem;
+    margin-bottom: 15px;
 }
 .download__meta h4 {
     margin-bottom: 0;
