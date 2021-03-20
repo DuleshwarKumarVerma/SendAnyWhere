@@ -12,22 +12,14 @@
 
 body {
 	font-family: system-ui;
-	background: var(--main-bg-color);
-	color: #6b6b6b;
+	background: linear-gradient(to right, #b92b27, #1565c0);
+	color: #a38282;
 }
 
-.navbar	{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 5px 6rem 1.3rem 6rem;
-	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-}
+.navbar-nav{
+	margin-left: auto;
+  }
 
-.logo {
-	width: 150px;
-	height: auto;  
-}
 
 .details {
 	margin-top: -35px;
@@ -50,7 +42,7 @@ body {
 
 /* Main */
 main {
-	max-width: 1200px;
+	max-width: 1000px;
 	margin: 5rem auto;
 	background: #fff;
 	border-radius: 10px;

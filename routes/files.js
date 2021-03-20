@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const File = require('../models/file');
 const { v4: uuidv4 } = require('uuid');
-
+const User = require('../models/user');
 let storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'uploads/') ,
     filename: (req, file, cb) => {
@@ -26,8 +26,23 @@ router.post('/', (req, res) => {
             path: req.file.path,
             size: req.file.size
         });
+        
         const response = await file.save();
-        res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}` });
+        const fileURL = `${process.env.APP_BASE_URL}/files/${response.uuid}`
+        // Look for the user who created the file and add the file ID to the files_created array
+
+        User.findOne({ _id: req.user.id }, async (err, user) => {
+           if (user) {
+            console.log('USER FOUND: ' + user);
+            user.files_created.push({ filename: response.filename, date: new Date(response.createdAt).toDateString(), uuid: response.uuid });
+            await user.save();
+            res.json({ file: fileURL });
+          } else {
+            req.flash('error_msg', 'Error occurred');
+          }
+          
+        });
+       
       });
 });
 

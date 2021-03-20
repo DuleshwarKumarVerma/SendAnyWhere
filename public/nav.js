@@ -9,7 +9,7 @@ toggler.addEventListener('click', () => {
 
 
 //  Delete feature
-/*
+
 deleteBtn.forEach(btn => {
 	btn.addEventListener('click', (e) => {
 		const result = confirm('Do you really want to delte this?');
@@ -21,4 +21,4 @@ deleteBtn.forEach(btn => {
 			})
 		}
 	})
-})*/
+})

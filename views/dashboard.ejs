@@ -7,16 +7,30 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/dashboard.css">
-	<script src="../js/nav.js" defer></script>
+	<script src="../nav.js" defer></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/users/login">SendAnyWhere</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                
+                    <a class="nav-link" href="/users/logout">Logout</a>
+
+                
+            </div>
+            </div>
+        </div>
+    </nav>
 	<div class="toggle">
 		<i class="fas fa-bars fa-2x toggle"></i>
 	</div>
-	<nav class="navbar">
-		<a href="/" ><img class="logo" src="../img/logo.png" alt=""></a>
-		<a href="/users/logout" class="button">Logout</a>
-	</nav>
 
 	<main>
 		<div class="user-info">
@@ -58,10 +72,10 @@
 								    <td class="filename-td"><%= file.filename %></td>
 								    <td><%= file.date %></td>
 								    <td class="share-btns">
-								    	<a class="download-btn" href="https://http://localhost:3000//files/<%= file.uuid %>">
+								    	<a class="download-btn" href="http://localhost:3000/files/<%= file.uuid %>">
 								    		<i class="fas fa-external-link-alt"></i>
 								    	</a>
-										<a class="download-btn whatsapp" href="whatsapp://send?text=https://http://localhost:3000//files/<%= file.uuid %>">
+										<a class="download-btn whatsapp" href="whatsapp://send?text=http://localhost:3000/files/<%= file.uuid %>">
 								    		<i class="fab fa-whatsapp"></i>
 								    	</a>
 								    </td>
@@ -79,5 +93,8 @@
 			</div>
 		<% } %>
 	</main>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    
+    
 </body>
 </html>
