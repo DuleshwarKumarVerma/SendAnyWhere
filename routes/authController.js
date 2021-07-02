@@ -2,18 +2,60 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
-router.get('/register' , (req ,res)=>{
-    res.render('register')
-});
+// User Model
+const User = require('../models/user.js');
 
-router.get('/login' , (req ,res)=>{
-    res.render('login')
-});
+// Nodemailer transporter
+const transporter = nodemailer.createTransport({
+	service: 'GMAIL',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true, 
+	auth: {
+		user: process.env.GMAIL_USER,
+		pass: process.env.GMAIL_PASS
+	}
+})
 
-router.post('/register', async (req ,res)=>{
-    console.log(req.body);
+// Generate new verification link and send email
+const sendVerificationLink = (newUser) => {
+	// ASYNC EMAIL
+	jwt.sign(
+		{user: newUser.email},
+		process.env.EMAIL_SECRET,
+		{expiresIn: '1d'},
+		(err, emailToken) => {
+			if (err) throw err;
+			const url = `${process.env.APP_BASE_URL}/confirmation/${emailToken}`;
+
+			transporter.sendMail({
+				to: newUser.email,
+				subject: '[SendAnyWhere] Confirm you email',
+				html: `<h3>Please click the link below to verify your email</h3><br>` + 
+						`<a href="${url}">${url}</a> <br>` +
+						`<b>NOTE: This link is valid for 24hrs</b>`
+			})
+		}
+	)
+	console.log('Verfication Link Sent!')
+}
+
+// Login 
+router.get('/login', (req, res) => {
+	res.render('login');
+})
+// Register 
+router.get('/register', (req, res) => {
+	res.render('register');
+})
+
+// Handler Register
+router.post('/register', (req, res) => {
+	// console.log(req.body);
 	const { username, email, password, password2 } = req.body;
 
 	// Array of errors
@@ -42,27 +84,36 @@ router.post('/register', async (req ,res)=>{
 				console.log("EMAIL EXISTS");
 				errors.push({ msg: 'Email already exists' });
 				res.render('register', { errors, username, password, email })
-			}
-        })
-        // Hash password 
-        const hashedPassword = await bcrypt.hash(password, 13)
-        // Create a user 
-        const user = new User({
-            username,
-            email,
-            password: hashedPassword
-        })
+			} else {
+				const newUser = new User ({
+					username,
+					email,
+					password
+				});
 
-        user.save().then(value => {
-            console.log('New user saved: ' + value);
-            //req.flash('success_msg', 'Success! A verification link is sent to your email.');
-            res.redirect('/users/login');
-        }).catch(err => {
-            console.log(err);
-            req.flash('error_msg', err.message);
-            res.redirect('/users/login');
-        })
+				// Send new verification email
+				sendVerificationLink(newUser);
+
+				// Hash the password
+				bcrypt.hash(newUser.password, 13, (err, hash) => {
+					if (err) throw err;
+					// Else save the person to the database
+					newUser.password = hash;
+					newUser.save()
+						.then(value => {
+							// console.log('New user saved: ' + value);
+							req.flash('success_msg', 'Success! A verification link is sent to your email.');
+							res.redirect('/users/login');
+						})
+						.catch(err => {
+							console.log(err);
+							req.flash('error_msg', err.message);
+							res.redirect('/users/login');
+						});
+				})
 				
+			}
+		})
 	}
 });
 
@@ -75,10 +126,14 @@ router.post('/login', (req, res, next) => {
 	})(req, res, next);
 });
 
+
+
+// Logout
 router.get('/logout', (req, res) => {
 	req.logout();
 	req.flash('success_msg', 'Logged out!');
 	res.redirect('/users/login');
 });
+
 
 module.exports = router;
