@@ -47,7 +47,6 @@ copyURLBtn.addEventListener("click", () => {
 fileURL.addEventListener("click", () => {
   fileURL.select();
 });
-
 const uploadFile = () => {
   console.log("file added uploading");
 
