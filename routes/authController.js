@@ -32,13 +32,18 @@ const sendVerificationLink = (newUser) => {
 			if (err) throw err;
 			const url = `${process.env.APP_BASE_URL}/confirmation/${emailToken}`;
 
-			transporter.sendMail({
+			const sendMail = require('../services/mailService');
+			sendMail({
+				from: 'noreply@sendanywhere.com',
 				to: newUser.email,
 				subject: '[SendAnyWhere] Confirm you email',
+				text: `shared a file with you.`,
 				html: `<h3>Please click the link below to verify your email</h3><br>` + 
-						`<a href="${url}">${url}</a> <br>` +
-						`<b>NOTE: This link is valid for 24hrs</b>`
+							`<a href="${url}">${url}</a> <br>` +
+							`<b>NOTE: This link is valid for 24hrs</b>`
+
 			})
+
 		}
 	)
 	console.log('Verfication Link Sent!')
