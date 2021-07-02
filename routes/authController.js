@@ -12,8 +12,8 @@ const User = require('../models/user.js');
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
 	service: 'GMAIL',
-	host: process.env.GMAIL_host,
-    port: process.env.GMAIL_port,
+	host: 'smtp.gmail.com',
+    port: 465,
 	secure: true, 
 	auth: {
 		user: process.env.GMAIL_USER,
