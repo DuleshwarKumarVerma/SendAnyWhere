@@ -53,5 +53,6 @@ app.use('/api/files', require('./routes/files'));
 app.use('/files',require('./routes/show'));
 app.use('/files/download',require('./routes/download'));
 app.use('/delete', require('./routes/delete'));
+app.use('/confirmation', require('./routes/confirmation'));
 
 app.listen(PORT, console.log(`Listening on port ${PORT}.`));

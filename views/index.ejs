@@ -32,17 +32,17 @@
         </div>
     </nav>
 
+    
+
     <div class="main">
         <section class="upload-container">
             <form action="">
-                <div class="drop-zone">
+                <input type="file" id="fileInput">
+                <div class="upload-zone">
                     <div class="icon-container">
-                        <img src="file.svg" draggable="false" class="center" alt="File Icon">
-                        <img src="file.svg" draggable="false" class="left" alt="File Icon">
-                        <img src="file.svg" draggable="false" class="right" alt="File Icon">
+                        <img src="file.png" draggable="false" class="center" alt="File Icon">
                     </div>
-                    <input type="file" id="fileInput">
-                    <div class="title">Drop your Files here or, <span id="browseBtn">browse</span></div>
+                    <div class="title">Upload your Files here</div>
                 </div>
             </form>
             <div class="progress-container">
@@ -59,13 +59,15 @@
             </div>
             <div class="sharing-container">
                 <p class="expire">Link expires in 24 hrs</p>
-    
+                
     
                 <div class="input-container">
                     <input type="text" id="fileURL" readonly>
                     <img src="./copy-icon.svg" id="copyURLBtn" alt="copy to clipboard icon">
                 </div>
-                
+                 <div class="qrcode-container">
+                    <canvas id="canvas"> </canvas>
+                  </div>
                     <p class="email-info">Or Send via Email</p>
                     <div class="email-container">
                     <form id="emailForm">
@@ -92,7 +94,9 @@
     </div>
     
     <div class="toast">Sample message</div>
+    <script src="qrcode.min.js"></script>
     <script src="index.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     
     

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+/*const shortId = require('shortid')*/
 
 const fileSchema = new Schema({
     filename: { type: String, required: true },
@@ -8,6 +9,7 @@ const fileSchema = new Schema({
     uuid: { type: String, required: true },
     sender: { type: String, required: false },
     receiver: { type: String, required: false },
+    /*short: { type: String, required: true, default: shortId.generate},*/
 }, { timestamps: true });
 
 module.exports = mongoose.model('File', fileSchema);

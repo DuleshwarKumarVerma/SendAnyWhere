@@ -1,6 +1,7 @@
-const dropZone = document.querySelector(".drop-zone");
+
 const fileInput = document.querySelector("#fileInput");
-const browseBtn = document.querySelector("#browseBtn");
+const upload_zone = document.querySelector(".upload-zone");
+const canvas = document.getElementById("canvas");
 
 const bgProgress = document.querySelector(".bg-progress");
 const progressPercent = document.querySelector("#progressPercent");
@@ -15,45 +16,15 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "http://localhost:3000"; 
+const baseURL = "https://sendanywhere-yt.herokuapp.com"; 
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 
 const maxAllowedSize = 100 * 1024 * 1024; //100mb
 
 
-browseBtn.addEventListener("click", () => {
+upload_zone.addEventListener("click", () => {
   fileInput.click();
-});
-
-dropZone.addEventListener("drop", (e) => {
-  e.preventDefault();
-  //   console.log("dropped", e.dataTransfer.files[0].name);
-  const files = e.dataTransfer.files;
-  if (files.length === 1) {
-    if (files[0].size < maxAllowedSize) {
-      fileInput.files = files;
-      uploadFile();
-    } else {
-      showToast("Max file size is 100MB");
-    }
-  } else if (files.length > 1) {
-    showToast("You can't upload multiple files");
-  }
-  dropZone.classList.remove("dragged");
-});
-
-dropZone.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  dropZone.classList.add("dragged");
-
-  // console.log("dropping file");
-});
-
-dropZone.addEventListener("dragleave", (e) => {
-  dropZone.classList.remove("dragged");
-
-  console.log("drag ended");
 });
 
 // file input change and uploader
@@ -130,6 +101,16 @@ const onFileUploadSuccess = (res) => {
   console.log(url);
   sharingContainer.style.display = "block";
   fileURL.value = url;
+
+  if (fileURL.value !== "") {
+    
+    QRCode.toCanvas(canvas, fileURL.value, {
+      width: 1000
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  
 };
 
 emailForm.addEventListener("submit", (e) => {
