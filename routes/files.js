@@ -3,6 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const File = require('../models/file');
 const { v4: uuidv4 } = require('uuid');
+
+const { nanoid } = require('nanoid')
 const User = require('../models/user');
 let storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'uploads/') ,
@@ -22,7 +24,7 @@ router.post('/', (req, res) => {
       }
         const file = new File({
             filename: req.file.filename,
-            uuid: uuidv4(),
+            uuid: nanoid(8),
             path: req.file.path,
             size: req.file.size
         });

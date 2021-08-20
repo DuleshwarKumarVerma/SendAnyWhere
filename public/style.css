@@ -17,6 +17,46 @@ body {
   background: linear-gradient(to right, #b92b27, #1565c0);
 }
 
+.recieve{
+  color: rgb(23, 23, 110);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.Download-container{
+  position: absolute;
+  background: #e9c0c0; 
+  border-radius: 25px;
+  box-shadow: 0px 20px 20px 0px #00000017;
+  z-index: 5;
+  position: absolute;
+  bottom: 45px;
+  right: 180px;
+ 
+}
+.btn{
+  font-size: 18px;
+  padding: 8px 30px;
+  background: #ce5955;
+  border: none;
+  border-radius: 5px;
+  color: #ffff;
+  cursor: pointer;
+}
+
+.keyInput{
+  outline: none;
+  border-color: cornsilk;
+  margin-left: 70px;
+  border-radius: 8px;
+  
+}
+.Download{
+  padding: 8px;
+  border: 2px dashed var(--border-color);
+  border-radius: 10px;
+  margin: 18px;
+
+}
+
 .qrcode-container {
   
   display: flex;
@@ -81,7 +121,7 @@ canvas {
 
 .image-vector {
   width: 50vw;
-  height: 60vh;
+  height: 52vh;
   background: url(/undraw-upload.svg) no-repeat center;
   background-size: contain;
 
