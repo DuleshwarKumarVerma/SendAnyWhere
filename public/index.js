@@ -103,7 +103,7 @@ const onFileUploadSuccess = (res) => {
 
   if (fileURL.value !== "") {
     
-    QRCode.toCanvas(canvas, fileURL.value, {
+    QRCode.toCanvas(canvas, `${baseURL}/files/${fileURL.value}`, {
       width: 1000
     }, (err) => {
       console.log(err);
@@ -119,7 +119,7 @@ emailForm.addEventListener("submit", (e) => {
   emailForm[2].setAttribute("disabled", "true");
   emailForm[2].innerText = "Sending";
 
-  const url = fileURL.value;
+  const url = `${baseURL}/files/${fileURL.value}`;
 
   const formData = {
     uuid: url.split("/").splice(-1, 1)[0],

@@ -30,7 +30,8 @@ router.post('/', (req, res) => {
         });
         
         const response = await file.save();
-        const fileURL = `${process.env.APP_BASE_URL}/files/${response.uuid}`
+        //const fileURL = `${process.env.APP_BASE_URL}/files/${response.uuid}`
+        const fileURL = response.uuid;
         // Look for the user who created the file and add the file ID to the files_created array
 
         User.findOne({ _id: req.user.id }, async (err, user) => {

@@ -51,6 +51,7 @@ app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/authController'));
 app.use('/api/files', require('./routes/files'));
 app.use('/files',require('./routes/show'));
+app.use('/key',require('./routes/key'));
 app.use('/files/download',require('./routes/download'));
 app.use('/delete', require('./routes/delete'));
 app.use('/confirmation', require('./routes/confirmation'));

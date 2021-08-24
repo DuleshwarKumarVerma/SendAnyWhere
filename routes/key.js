@@ -1,9 +1,13 @@
 const router = require('express').Router();
 const File = require('../models/file');
 
-router.get('/:uuid', async (req, res) => {
+router.post('/', async (req, res) => {
+	
+
+	const obj = JSON.parse(JSON.stringify(req.body)); 
+    console.log(obj.Download);
     try {
-        const file = await File.findOne({ uuid: req.params.uuid });
+        const file = await File.findOne({ uuid: obj.Download});
         
         if(!file) {
             return res.render('download', { error: 'Link has been expired.'});
